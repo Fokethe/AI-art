@@ -69,7 +69,7 @@ Page({
       sampleStep: e.detail.value
     })
   },
-  
+
   //设置采样规模
   slider2change: function (e) {
     console.log('采样规模改变，携带值为', e.detail.value)
@@ -126,7 +126,7 @@ Page({
     })
 
 
-// 云函数
+    // 云函数
     /*var that = this;
     wx.cloud.callFunction({
       name: 'httpFunctions',
@@ -164,20 +164,17 @@ Page({
   },
 
   //把base64转换成图片
-   saveImage:function(base64Data) {
-    wx.getFileSystemManager().writeFile({
-      filePath: `${wx.env.USER_DATA_PATH}/image.png`,
-      data: base64Data,
-      encoding: 'base64',
-      success: function () {
-        console.log('图片写入成功！');
-      },
-      fail: function (error) {
-        console.log(error);
-      }
-    });
-  }
-  ,
+  getBase64ImageUrl: function (data) {
+    //console.log(data) 
+    /// 获取到base64Data
+    var base64Data = data;
+    /// 通过微信小程序自带方法将base64转为二进制去除特殊符号，再转回base64
+    base64Data = wx.arrayBufferToBase64(wx.base64ToArrayBuffer(base64Data));
+    /// 拼接请求头，data格式可以为image/png或者image/jpeg等，看需求
+    const base64ImgUrl = "data:image/png;base64," + base64Data;
+    /// 刷新数据
+    return base64ImgUrl;
+  },
 
   // 重置按钮
   bindReset: function () {
