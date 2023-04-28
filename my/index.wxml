@@ -1,0 +1,80 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="index">
+    <view class=".index-text1">
+      <!-- 图片 -->
+      <image  style="height: 150px; background-color: #ffffff;" show-menu-by-longpress='1' bindtap='bindClickImg' mode='aspectFit' src="{{imgPath}}"></image>
+
+      <form bindsubmit="bindGenerate" bindreset="bindReset">
+        <view class="weui-cells weui-cells_after-title">
+
+          <!-- 提示词 -->
+          <view class="weui-cell">
+            <input class="weui-prompt-input" type="text" bindinput="bindPromptInput" placeholder="念出你的魔法咒语。" />
+          </view>
+          <!-- 反向提示词  -->
+          <view class="weui-cell">
+            <input class="weui-nprompt-input" type="text" bindinput="bindNPromptInput" placeholder="施法失败的咒语。" />
+          </view>
+          <!-- 种子 -->
+          <view class="weui-cell">
+            <input class="weui-seed-input" type="number" bindinput="bindSeedInput" placeholder="输入魔法种子" />
+          </view>
+
+        </view>
+
+        <!-- 分辨率 -->
+        <view class="section">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cells__title index-text2">分辨率</view>
+
+            <view class="weui-cell">
+              <view class="weui-cell__hd">
+                <view class="weui-label index-text2">当前选择：</view>
+              </view>
+
+              <!-- 分辨率行列选择组件 -->
+              <view class="weui-cell__hd">
+                <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                  <!-- 值相乘并显示在视图中 -->
+                  <view class="picker">
+                    {{multiArray[0][multiIndex[0]]}} x {{multiArray[1][multiIndex[1]]}}
+                  </view>
+                </picker>
+              </view>
+
+            </view>
+          </view>
+        </view>
+
+
+        <view class="section section_gap">
+          <view class="weui-cells weui-cells_after-title">
+            <!-- 采样步数 -->
+            <text class="section__title ">设置采样步数</text>
+            <!-- 滑块组件 -->
+            <view class="body-view">
+              <slider bindchange="slider1change" min="1" max="150" value="{{sampleStep}}" show-value left-icon="cancel" right-icon="success_no_circle" />
+
+            </view>
+            <!-- 采样规模 -->
+            <text class="section__title">设置采样规模</text>
+            <!-- 滑块组件 -->
+            <view class="body-view">
+              <slider bindchange="slider2change" min="1" max="30" value="{{scale}}" show-value left-icon="cancel" right-icon="success_no_circle" />
+            </view>
+
+          </view>
+        </view>
+
+        <!-- 生成按钮 -->
+        <view class="weui-cell">
+          <button class=".button1 " form-type="submit">🎨施法</button>
+        </view>
+        <!-- 重置按钮 -->
+        <button class=".button2 " plain="true" form-type="reset">🗑️清空</button>
+
+
+      </form>
+    </view>
+  </view>
+</view>

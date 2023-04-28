@@ -1,0 +1,20 @@
+/*@import "../dist/style/weui.wxss";*/
+
+.weui-agree__link {
+  display: inline;
+  color: var(--weui-LINK);
+}
+slider{margin-bottom:30px}
+
+/*页面全局文本 */
+.index-text1 {
+  padding: 5px;
+  text-align:left;
+}
+/*页面分辨率文本 */
+.index-text2 {
+  padding: 5px;
+  text-align:center;
+}
+
+
