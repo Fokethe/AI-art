@@ -102,20 +102,27 @@ Page({
       header: { 'content-type': 'application/json' },
       data: JSON.stringify({ ...params, prompt: this.data.prompt }),
       success: function (resp) {
-        console.log(resp.data)
+        // console.log(resp.data.images[0])
+        //将base64转换为图片
+        var imgPath = that.getBase64ImageUrl(resp.data.images[0])
+          that.setData({
+            imgPath: imgPath
+          });
 
-        if (resp.data && typeof resp.data === 'object') {
-          var str = JSON.stringify(resp.data)
-          if (str && str.includes('\\n')) {
-            var ss = str.split('\\n')[2]
-            if (ss && ss.includes(':')) {
-              var imgPath = that.getBase64ImageUrl(ss.split(':')[1])
-              that.setData({
-                imgPath: imgPath
-              });
-            }
-          }
-        }
+        // if (resp.data && typeof resp.data === 'object') {
+        //   var str = JSON.stringify(resp.data)
+        //   if (str.includes('\\n')) {
+        //     var ss = str.split('\\n')[2]
+        //     console.log("ss:" + ss)
+        //     if (ss.includes(':')) {
+        //       console.log("getBase64ImageUrl")
+        //       var imgPath = that.getBase64ImageUrl(ss.split(':')[1])
+        //       that.setData({
+        //         imgPath: imgPath
+        //       });
+        //     }
+        //   }
+        // }
 
         wx.hideLoading();
       },
@@ -172,6 +179,7 @@ Page({
     base64Data = wx.arrayBufferToBase64(wx.base64ToArrayBuffer(base64Data));
     /// 拼接请求头，data格式可以为image/png或者image/jpeg等，看需求
     const base64ImgUrl = "data:image/png;base64," + base64Data;
+    console.log(base64ImgUrl)
     /// 刷新数据
     return base64ImgUrl;
   },
